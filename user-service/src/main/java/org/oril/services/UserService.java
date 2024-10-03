@@ -1,22 +1,27 @@
 package org.oril.services;
 
-import lombok.AllArgsConstructor;
-import org.oril.entities.UserVO;
+import org.oril.entities.User;
+import org.oril.pojo.UserDto;
+import org.oril.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import static org.oril.mapper.UserMapper.userDtoToUser;
+import static org.oril.mapper.UserMapper.userToUserDto;
 
 @Service
-@AllArgsConstructor
 public class UserService {
 
-    public UserVO save(UserVO userVO) {
-        //simulate save operation;
-        String userId = String.valueOf(new Date().getTime());
-        userVO.setId(userId);
-        userVO.setRole("USER");
-        //save user
-        return userVO;
+    @Autowired
+    private UserRepository userRepository;
+
+    public UserDto save(UserDto userDto) {
+        userDto.setEnabled(true);
+        System.out.println(userDto.toString());
+        User user = userDtoToUser(userDto);
+        System.out.println(user.toString());
+
+        return userToUserDto(userRepository.save(user));
     }
 
 }

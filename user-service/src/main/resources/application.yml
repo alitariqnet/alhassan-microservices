@@ -4,4 +4,9 @@ server:
 spring:
   application:
     name: user-service
-
+  datasource:
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:5432/userdb
+  jpa:
+    show-sql: true
