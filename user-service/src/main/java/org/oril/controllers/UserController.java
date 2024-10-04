@@ -5,6 +5,7 @@ import org.oril.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
@@ -17,10 +18,10 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<UserDto> save(@RequestBody UserDto userDto) {
-//        System.out.println(user.toString());
         return ResponseEntity.ok(userService.save(userDto));
     }
 
+    @CrossOrigin
     @GetMapping("/secured")
     public ResponseEntity<String> securedEndpoint() {
         return ResponseEntity.ok("Hello, from secured endpoint!");

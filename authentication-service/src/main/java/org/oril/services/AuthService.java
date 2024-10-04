@@ -16,13 +16,18 @@ public class AuthService {
     private final JwtUtil jwtUtil;
 
     public AuthResponse register(AuthRequest request) {
-        //do validation if user exists in DB
-        request.setPassword(BCrypt.hashpw(request.getPassword(), BCrypt.gensalt()));
-        UserVO registeredUser = restTemplate.postForObject("http://user-service/users", request, UserVO.class);
-
-        String accessToken = jwtUtil.generate(registeredUser.getId(), registeredUser.getRole(), "ACCESS");
-        String refreshToken = jwtUtil.generate(registeredUser.getId(), registeredUser.getRole(), "REFRESH");
-
+        String accessToken = null;
+        String refreshToken = null;
+        try {
+            //do validation if user exists in DB
+            request.setPassword(BCrypt.hashpw(request.getPassword(), BCrypt.gensalt()));
+            UserVO registeredUser = restTemplate.postForObject("http://user-service/users", request, UserVO.class);
+            System.out.println("registered user -> "+registeredUser);
+            accessToken = jwtUtil.generate(registeredUser.getId(), registeredUser.getRole(), "ACCESS");
+            refreshToken = jwtUtil.generate(registeredUser.getId(), registeredUser.getRole(), "REFRESH");
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
         return new AuthResponse(accessToken, refreshToken);
     }
 

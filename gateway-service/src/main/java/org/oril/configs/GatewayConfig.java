@@ -15,6 +15,7 @@ public class GatewayConfig {
 
     @Bean
     public RouteLocator routes(RouteLocatorBuilder builder) {
+        System.out.println("RouteLocator hit");
         return builder.routes()
                 .route("user-service", r -> r.path("/users/**")
                         .filters(f -> f.filter(filter))
