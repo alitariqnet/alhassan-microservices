@@ -23,8 +23,8 @@ public class AuthenticationFilter implements GatewayFilter {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        ServerHttpRequest request = exchange.getRequest();
         System.out.println("Authentication filter hit");
+        ServerHttpRequest request = exchange.getRequest();
         if (validator.isSecured.test(request)) {
             if (authMissing(request)) {
                 return onError(exchange, HttpStatus.UNAUTHORIZED);

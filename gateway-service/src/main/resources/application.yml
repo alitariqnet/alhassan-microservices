@@ -22,7 +22,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: gateway,health
+        include: info,gateway,health,hystrix.stream
       cors:
         allowed-origins: http://localhost:3000
         allowed-methods:
