@@ -16,6 +16,7 @@
         <module>gateway-service</module>
         <module>notification-service</module>
         <module>inventory-service</module>
+        <module>shipment-service</module>
     </modules>
 
     <properties>

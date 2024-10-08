@@ -1,0 +1,12 @@
+server:
+  port: 9006
+
+spring:
+  application:
+    name: notification-service
+  datasource:
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:5432/shipmentdb
+  jpa:
+    show-sql: true
