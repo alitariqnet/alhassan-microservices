@@ -70,7 +70,7 @@ RUN adduser \
 USER appuser
 
 # Copy the executable from the "package" stage.
-COPY /target/discovery-service-1.0-SNAPSHOT.jar app.jar
+COPY discovery-service-1.0-SNAPSHOT.jar app.jar
 
 EXPOSE 8761
 
